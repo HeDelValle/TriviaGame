@@ -6,6 +6,19 @@ function Question(props) {
   return <div>{props.question}</div>;
 }
 
+function Answer(props) {
+  return (
+    <div>
+      {" "}
+      <button>{props.answer} </button>
+    </div>
+  );
+}
+
+function CorrectAnswer(props) {
+  return <div>{props.answer}</div>;
+}
+
 function App() {
   let currentQuestion = 0;
   console.log(data[0].question.text);
@@ -13,17 +26,18 @@ function App() {
   return (
     <div className="App">
       <Question question={data[currentQuestion].question.text} />
-      <button>
-        <Question question={data[currentQuestion].question.choices} />
-      </button>
-      <button onClick={() => (currentQuestion = 1)}>
-        <nextquestion />
-      </button>
-      console.log(data[1].question.text);
+
+      <Answer answer={data[currentQuestion].question.choices[0]} />
+      <Answer answer={data[currentQuestion].question.choices[1]} />
+      <Answer answer={data[currentQuestion].question.choices[2]} />
+      <Answer answer={data[currentQuestion].question.choices[3]} />
+
+      <CorrectAnswer
+        correctAnswer={data[currentQuestion].question.correct_choice_index}
+      />
+      <button onClick={() => (currentQuestion = 1)}>Next Question</button>
     </div>
   );
 }
 
 export default App;
-
-//write currentQuestion = currentQuestion +1and also console.log(data[1].question.text);
