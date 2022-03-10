@@ -6,20 +6,24 @@ function Question(props) {
   return <div>{props.question}</div>;
 }
 
+function Choice(props) {
+  return <div class="choice"> {props.answer}</div>;
+}
+
 function Answer(props) {
   return (
     <div>
       {" "}
-      <button>{props.answer} </button>
+      The correct answer's index is:
+      {props.answer}
     </div>
   );
-}
-
-function CorrectAnswer(props) {
-  return <div>{props.answer}</div>;
+  //conditional
 }
 
 function App() {
+  let [answerDisplayed, setAnswerDisplayed] = useState(false);
+
   let currentQuestion = 0;
   console.log(data[0].question.text);
 
@@ -27,15 +31,18 @@ function App() {
     <div className="App">
       <Question question={data[currentQuestion].question.text} />
 
-      <Answer answer={data[currentQuestion].question.choices[0]} />
-      <Answer answer={data[currentQuestion].question.choices[1]} />
-      <Answer answer={data[currentQuestion].question.choices[2]} />
-      <Answer answer={data[currentQuestion].question.choices[3]} />
+      <Choice answer={data[currentQuestion].question.choices[0]} />
+      <Choice answer={data[currentQuestion].question.choices[1]} />
+      <Choice answer={data[currentQuestion].question.choices[2]} />
+      <Choice answer={data[currentQuestion].question.choices[3]} />
 
-      <CorrectAnswer
-        correctAnswer={data[currentQuestion].question.correct_choice_index}
+      <Answer
+        showAnswer={answerDisplayed}
+        answer={data[currentQuestion].question.correct_choice_index}
       />
       <button onClick={() => (currentQuestion = 1)}>Next Question</button>
+
+      <button onClick={() => setAnswerDisplayed(true)}>Answer Question</button>
     </div>
   );
 }
